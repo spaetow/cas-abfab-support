@@ -100,9 +100,6 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
     /** The RADIUS Authenticator to use. */
     private final RadiusAuthenticator radiusAuthenticator;
     
-    /** The RADIUS packet that was returned */
-    private RadiusPacket response;
-
     /** Load the dictionary implementation. */
     static {
         AttributeFactory
@@ -204,6 +201,11 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
     }
 
     public boolean authenticate(
+    		final UsernamePasswordCredentials usernamePasswordCredentials) {
+    	return (this.authenticateEx(usernamePasswordCredentials) instanceof AccessAccept);
+    }
+    
+    public RadiusPacket authenticateEx(
         final UsernamePasswordCredentials usernamePasswordCredentials) {
         final RadiusClient radiusClient = getNewRadiusClient();
 
@@ -225,22 +227,18 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
         	if (this.radiusAuthenticator instanceof EAPTTLSAuthenticator) {
         		((EAPTTLSAuthenticator) radiusAuthenticator).setInnerProtocol(this.eapInnerProtocol);
         	}
-        	this.response = radiusClient.authenticate(request, radiusAuthenticator, this.retries);
+        	final RadiusPacket response = radiusClient.authenticate(request, radiusAuthenticator, this.retries);
             
             // accepted
-            if (this.response instanceof AccessAccept) {
-                LOG.debug("Authentication request suceeded for host:"
-                    + this.inetAddress.getCanonicalHostName()
-                    + " and username "
-                    + usernamePasswordCredentials.getUsername());
-                return true;
+            if (response instanceof AccessAccept) {
+                LOG.debug("Authentication request suceeded for host: {} and username {}", 
+                    this.inetAddress.getCanonicalHostName(), usernamePasswordCredentials.getUsername());
+            } else {
+	            // rejected
+	            LOG.debug("Authentication request failed for host: {} and username {}",
+	                this.inetAddress.getCanonicalHostName(), usernamePasswordCredentials.getUsername());
             }
-
-            // rejected
-            LOG.debug("Authentication request failed for host:"
-                + this.inetAddress.getCanonicalHostName() + " and username "
-                + usernamePasswordCredentials.getUsername());
-            return false;
+            return response;
         } catch (final UnknownAttributeException e) {
             throw new IllegalArgumentException(
                 "Passed an unknown attribute to RADIUS client: "
@@ -271,13 +269,5 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
             radiusAuthenticator = this.radiusAuthenticator;
         }
         return radiusAuthenticator;
-    }
-
-    /**
-     * Function that returns the AccessAccept packet with the attributes.
-     * @return this.response The access packet.
-     */
-    public RadiusPacket getRadiusResponse() {
-    	return this.response;
     }
 }

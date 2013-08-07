@@ -4,7 +4,6 @@ import net.jradius.exception.UnknownAttributeException;
 import net.jradius.packet.attribute.AttributeFactory;
 import net.jradius.packet.attribute.AttributeList;
 import net.jradius.packet.attribute.RadiusAttribute;
-import net.jradius.packet.attribute.value.AttributeValue;
 import net.jradius.packet.attribute.value.StringValue;
 
 public class SAMLAssertionAttributeFilter {
@@ -24,30 +23,22 @@ public class SAMLAssertionAttributeFilter {
 	}
     
 	/**
-	 * @return a string representing the complete attribute
+	 * @return A string representing the complete attribute
 	 */
-    public String filter() throws UnknownAttributeException {
+    public String getAssertion() throws UnknownAttributeException {
 		StringBuilder sb = new StringBuilder();
-		final Object[] attributeArray = attributes.getArray(AttributeFactory.getTypeByName(attributeName));
+		final Object[] attributeArray = this.attributes.getArray(AttributeFactory.getTypeByName(attributeName));
 		for (final Object attributeObject : attributeArray) {
 			if (attributeObject instanceof RadiusAttribute) {
-				final AttributeValue av = ((RadiusAttribute) attributeObject).getValue();
-				final String s = ((StringValue) av).toString(); 
-				sb.append(s);
+				final StringValue sv = (StringValue) ((RadiusAttribute) attributeObject).getValue();
+				sb.append(sv.toString());
 			}
 		}
 		return sb.toString();
     }
     
 	/**
-	 * @param Reset the internal attributes to the list passed in
-	 */
-	public void setAttributes(final AttributeList attributes) {
-		this.attributes = attributes;
-	}
-
-	/**
-	 * @return the attributes
+	 * @return The RADIUS attributes stored in this class
 	 */
 	public AttributeList getAttributes() {
 		return attributes;
