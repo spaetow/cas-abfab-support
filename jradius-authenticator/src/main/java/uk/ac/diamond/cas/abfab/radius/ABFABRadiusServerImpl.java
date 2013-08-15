@@ -175,6 +175,30 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
     /**
      * Constructor that accepts the host name, shared secret, authentication type,
      * authentication port, accounting port, timeout and number of retries.
+     * 
+     * @param hostName the host name of the RADIUS server.
+     * @param sharedSecret the shared secret with that server.
+     * @param radiusAuthenticator the RADIUS authenticator to use.
+     * @param authenticationPort the port to use to authenticate on.
+     * @param accountingPort the port to use to do accounting.
+     * @param socketTimeout the time before the RADIUS request times out.
+     * @param retries the number of retries for authentication.
+     * @throws UnknownHostException if the hostname cannot be resolved.
+     */
+    public ABFABRadiusServerImpl(final String hostName, final String sharedSecret,
+        final RadiusAuthenticator radiusAuthenticator,
+        final int authenticationPort, final int accountingPort,
+        final int socketTimeout, final int retries) throws UnknownHostException {
+        this(hostName, sharedSecret, radiusAuthenticator, authenticationPort,
+            accountingPort, socketTimeout, retries,
+            DEFAULT_EAP_INNER_PROTOCOL);
+    }
+
+
+    /**
+     * Constructor that accepts the host name, shared secret, authentication type,
+     * authentication port, accounting port, timeout, number of retries 
+     * and inner EAP protocol.
      * @param hostName the host name of the RADIUS server.
      * @param sharedSecret the shared secret with that server.
      * @param radiusAuthenticator the RADIUS authenticator to use.
