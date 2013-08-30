@@ -17,8 +17,8 @@ It contains:
       - Adds GSS-* ABFAB (see http://datatracker.ietf.org/doc/draft-ietf-abfab-gss-eap/) attributes to RADIUS request
       - In CAS 3.5.x specifically, enables EAP-TTLS authentication with inner protocols PAP, MD5 or EAP-MSCHAPv2
 
-    Usage of ABFABRadiusServerImpl in the deployerConfigContext.xml matches the CAS 4.0.0 style, and is compatible with 
-    CAS 3.5.2:
+Usage of ABFABRadiusServerImpl in the deployerConfigContext.xml matches the CAS 4.0.0 style, and is compatible with 
+CAS 3.5.2:
     
     1. Include the following namespace:
     
