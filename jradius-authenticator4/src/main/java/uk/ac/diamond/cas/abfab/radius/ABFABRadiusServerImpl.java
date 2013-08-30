@@ -93,7 +93,7 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
 
     @Override
     public boolean authenticate(final String username, final String password) throws PreventedException {
-    	return (this.authenticateEx(username, password) instanceof AccessAccept);
+        return (this.authenticateEx(username, password) instanceof AccessAccept);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
      * @throws PreventedException
      */
     public RadiusPacket authenticateEx(final String username, final String password) 
-    		throws PreventedException {
+            throws PreventedException {
 
         final AttributeList attributeList = new AttributeList();
         attributeList.add(new Attr_UserName(username));
@@ -112,9 +112,9 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
         // give it the GSS Service Name and Host Name attributes
         attributeList.add(new Attr_GSSAcceptorServiceName("cas"));
         try {
-        	attributeList.add(new Attr_GSSAcceptorHostName(InetAddress.getLocalHost().getCanonicalHostName()));
+            attributeList.add(new Attr_GSSAcceptorHostName(InetAddress.getLocalHost().getCanonicalHostName()));
         } catch (final UnknownHostException e) {
-        	attributeList.add(new Attr_GSSAcceptorHostName("localhost"));
+            attributeList.add(new Attr_GSSAcceptorHostName("localhost"));
         }
 
         final RadiusClient client = this.radiusClientFactory.newInstance();

@@ -151,7 +151,7 @@ public class ABFABRadiusAuthenticationHandler extends AbstractUsernamePasswordAu
                     }
                     logger.debug("failoverOnAuthenticationFailure enabled -- trying next server");
                 } else {
-                	// do what the classic JRadiusServerImpl does
+                    // do what the classic JRadiusServerImpl does
                     if (radiusServer.authenticate(username, password)) {
                         return new SimplePrincipal(username);
                     } else if (!this.failoverOnAuthenticationFailure) {
@@ -169,7 +169,7 @@ public class ABFABRadiusAuthenticationHandler extends AbstractUsernamePasswordAu
         throw new FailedLoginException();
     }
 
-	/**
+    /**
      * Determines whether to fail over to the next configured RadiusServer if
      * there was an authentication failure.
      * 

@@ -91,80 +91,80 @@ public class ABFABRadiusAuthenticationHandler extends
 
         for (final RadiusServer radiusServer : this.servers) {
             try {
-            	// let's initialise the variable to make Java happy
-            	boolean response;
-            	
-            	if (!(radiusServer instanceof ABFABRadiusServerImpl)) {
-                	response = radiusServer.authenticate(credentials);
-            	} else {
-                	RadiusPacket radiusResponse = ((ABFABRadiusServerImpl) radiusServer).authenticateEx(credentials);
-                	response = (radiusResponse instanceof AccessAccept);
-            		
-	                // We had a successful authentication, and we have our extended server implementor
-	                if (response) {
-	
-	                	// get the list of attributes, then feed it into the SAMLAssertionFilter
-	            		final SAMLAssertionAttributeFilter samlAssertionFilter = 
-	            				new SAMLAssertionAttributeFilter(radiusResponse.getAttributes());
-	            		try {
-	            			final String samlAssertion = samlAssertionFilter.getAssertion();
-	                        log
-	                        .debug("Successfully extracted SAML assertion from RADIUS response: {}", samlAssertion);
-	                		
-	                        // try to load the assertion into a document
-	                        final SAMLAssertionAttributeExtractor samlExtractor = new SAMLAssertionAttributeExtractor(samlAssertion);
-	                        if (!samlExtractor.isEmpty()) {
-	                            log
-	                            .debug("Successfully parsed SAML assertion into XML document");
-	                        }
-	                        
-	                    	try {
-	                    		if (samlExtractor.getAttributeStatement().hasChildren()) {
-		                            log
-		                            .debug("Found attribute statement in SAML2 assertion.");
-	                    		}
-	                            
-	                            final String newCredential = samlExtractor.getAttributeValue(principalIdentifierURN);
-	                            if (!newCredential.isEmpty()) {
-	                    			log
-	                    			.info("Authentication was successful. Credential {} mapped to {}", credentials.getUsername(), 
-	                    					newCredential);
-	                    			
-	                    			// set the credential
-	                            	credentials.setUsername(newCredential);
-	                            	credentials.setPassword("");
-	                            } else {
-	                    			log
-	                    			.info("Authentication was successful. Credential mapping for {} failed. Continuing with existing credentials", 
-	                    					credentials.getUsername());
-	                            }
-	    	        		} catch (final UnmarshallingException e) {
-	                			log
-	                			.error("Authentication was successful, unable to load the SAML assertion for information retrieval!");
-	                    	} catch (final IndexOutOfBoundsException e) {
-	                            log
-	                            .error("Authentication was successful, no attribute statement found in the SAML assertion!");
-	    	        		} catch (final AttributeNotFoundException e) {
-	                			log
-	                			.error("Authentication was successful, unable to retrieve attribute {} from SAML assertion!", 
-	                					principalIdentifierURN);
-	                    	}
-	                		
-	            		} catch (final UnknownAttributeException e) {
-	            			log
-	            			.error("Authentication was successful, but SAML assertion was not present in RADIUS response!");
-		        		} catch (final ConfigurationException e) {
-	            			log
-	            			.error("Authentication was successful, but SAML library initialisation failed!");
-		        		} catch (final XMLParserException e) {
-	            			log
-	            			.error("Authentication was successful, but parsing the included SAML assertion failed!");
-		        		} catch (final Exception e) {
-		        			log
-		        			.error("Authentication was successful, but another error occurred: " + e.toString());
-		        		}
-	            	}
-            	}
+                // let's initialise the variable to make Java happy
+                boolean response;
+                
+                if (!(radiusServer instanceof ABFABRadiusServerImpl)) {
+                    response = radiusServer.authenticate(credentials);
+                } else {
+                    RadiusPacket radiusResponse = ((ABFABRadiusServerImpl) radiusServer).authenticateEx(credentials);
+                    response = (radiusResponse instanceof AccessAccept);
+                    
+                    // We had a successful authentication, and we have our extended server implementor
+                    if (response) {
+    
+                        // get the list of attributes, then feed it into the SAMLAssertionFilter
+                        final SAMLAssertionAttributeFilter samlAssertionFilter = 
+                                new SAMLAssertionAttributeFilter(radiusResponse.getAttributes());
+                        try {
+                            final String samlAssertion = samlAssertionFilter.getAssertion();
+                            log
+                            .debug("Successfully extracted SAML assertion from RADIUS response: {}", samlAssertion);
+                            
+                            // try to load the assertion into a document
+                            final SAMLAssertionAttributeExtractor samlExtractor = new SAMLAssertionAttributeExtractor(samlAssertion);
+                            if (!samlExtractor.isEmpty()) {
+                                log
+                                .debug("Successfully parsed SAML assertion into XML document");
+                            }
+                            
+                            try {
+                                if (samlExtractor.getAttributeStatement().hasChildren()) {
+                                    log
+                                    .debug("Found attribute statement in SAML2 assertion.");
+                                }
+                                
+                                final String newCredential = samlExtractor.getAttributeValue(principalIdentifierURN);
+                                if (!newCredential.isEmpty()) {
+                                    log
+                                    .info("Authentication was successful. Credential {} mapped to {}", credentials.getUsername(), 
+                                            newCredential);
+                                    
+                                    // set the credential
+                                    credentials.setUsername(newCredential);
+                                    credentials.setPassword("");
+                                } else {
+                                    log
+                                    .info("Authentication was successful. Credential mapping for {} failed. Continuing with existing credentials", 
+                                            credentials.getUsername());
+                                }
+                            } catch (final UnmarshallingException e) {
+                                log
+                                .error("Authentication was successful, unable to load the SAML assertion for information retrieval!");
+                            } catch (final IndexOutOfBoundsException e) {
+                                log
+                                .error("Authentication was successful, no attribute statement found in the SAML assertion!");
+                            } catch (final AttributeNotFoundException e) {
+                                log
+                                .error("Authentication was successful, unable to retrieve attribute {} from SAML assertion!", 
+                                        principalIdentifierURN);
+                            }
+                            
+                        } catch (final UnknownAttributeException e) {
+                            log
+                            .error("Authentication was successful, but SAML assertion was not present in RADIUS response!");
+                        } catch (final ConfigurationException e) {
+                            log
+                            .error("Authentication was successful, but SAML library initialisation failed!");
+                        } catch (final XMLParserException e) {
+                            log
+                            .error("Authentication was successful, but parsing the included SAML assertion failed!");
+                        } catch (final Exception e) {
+                            log
+                            .error("Authentication was successful, but another error occurred: " + e.toString());
+                        }
+                    }
+                }
                 
                 if (response
                     || (!response && !this.failoverOnAuthenticationFailure)) {
@@ -186,7 +186,7 @@ public class ABFABRadiusAuthenticationHandler extends
         return false;
     }
 
-	/**
+    /**
      * Determines whether to fail over to the next configured RadiusServer if
      * there was an authentication failure.
      * 

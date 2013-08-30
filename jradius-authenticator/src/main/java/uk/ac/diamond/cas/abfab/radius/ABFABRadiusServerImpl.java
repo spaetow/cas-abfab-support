@@ -96,8 +96,8 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
 
     @Override
     public boolean authenticate(
-    		final UsernamePasswordCredentials usernamePasswordCredentials) {
-    	return (this.authenticateEx(usernamePasswordCredentials) instanceof AccessAccept);
+            final UsernamePasswordCredentials usernamePasswordCredentials) {
+        return (this.authenticateEx(usernamePasswordCredentials) instanceof AccessAccept);
     }
 
     /**
@@ -108,7 +108,7 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
      * @throws IllegalStateException
      */
     public RadiusPacket authenticateEx(final UsernamePasswordCredentials credentials) 
-    		throws IllegalArgumentException, IllegalStateException {
+            throws IllegalArgumentException, IllegalStateException {
 
         final AttributeList attributeList = new AttributeList();
         attributeList.add(new Attr_UserName(credentials
@@ -119,9 +119,9 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
         // give it the GSS Service Name and Host Name attributes
         attributeList.add(new Attr_GSSAcceptorServiceName("cas"));
         try {
-        	attributeList.add(new Attr_GSSAcceptorHostName(InetAddress.getLocalHost().getCanonicalHostName()));
+            attributeList.add(new Attr_GSSAcceptorHostName(InetAddress.getLocalHost().getCanonicalHostName()));
         } catch (final UnknownHostException e) {
-        	attributeList.add(new Attr_GSSAcceptorHostName("localhost"));
+            attributeList.add(new Attr_GSSAcceptorHostName("localhost"));
         }
 
         final RadiusClient client = this.radiusClientFactory.newInstance();
