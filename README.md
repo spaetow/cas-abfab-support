@@ -8,14 +8,17 @@ This repository contains extensions of the cas-server-support-radius module whic
 It contains:
 
     ABFABRadiusAuthenticationHandler - An extension of the standard RadiusAuthenticationHandler
-      - It deals with the SAML assertion returned in an Access-Accept packet from a Moonshot RADIUS server.
+      - It deals with the SAML assertion returned in an Access-Accept packet from a Moonshot RADIUS 
+        server.
       - New property "principalIdentifierURN" identifies which SAML attribute to use as credential
         
     ABFABRadiusServerImpl - An extension of the standard JRadiusServerImpl
-      - Additional method "authenticateEx" performs standard authentication and returns the Access-Accept packet
-        received from the RADIUS server (used by ABFABRadiusAuthenticationHandler)
-      - Adds GSS-* ABFAB (see http://datatracker.ietf.org/doc/draft-ietf-abfab-gss-eap/) attributes to RADIUS request
-      - In CAS 3.5.x specifically, enables EAP-TTLS authentication with inner protocols PAP, MD5 or EAP-MSCHAPv2
+      - Additional method "authenticateEx" performs standard authentication and returns the 
+        Access-Accept packet received from the RADIUS server (used by ABFABRadiusAuthenticationHandler)
+      - Adds GSS-* ABFAB (see http://datatracker.ietf.org/doc/draft-ietf-abfab-gss-eap/) attributes 
+        to RADIUS request
+      - In CAS 3.5.x specifically, enables EAP-TTLS authentication with inner protocols PAP, MD5 
+        or EAP-MSCHAPv2
 
 Usage of ABFABRadiusServerImpl in the deployerConfigContext.xml matches the CAS 4.0.0 style, and is compatible with 
 CAS 3.5.2:
@@ -38,11 +41,13 @@ CAS 3.5.2:
           p:inetAddress="ip.address.here"
           p:sharedSecret="radius.shared.secret.here" />
           
-    By specifying multiple RadiusServer beans with different protocol settings, you can try different protocols 
-    for authentication. You can specify multiple radiusClientFactory beans, each with different host names and 
-    secrets, and refer different RadiusServer beans to different client factories. 
+    By specifying multiple RadiusServer beans with different protocol settings, you can try different 
+    protocols for authentication. You can specify multiple radiusClientFactory beans, each with 
+    different host names and shared secrets, and refer different RadiusServer beans to different 
+    client factories. 
      
-    3. In the "servers" property of (ABFAB)RadiusAuthenticationHandler, simply refer to the server(s) as follows:
+    3. In the "servers" property of (ABFAB)RadiusAuthenticationHandler, simply refer to the server(s) as 
+    follows:
     
     <ref local="RadiusServer_id1" />
     :
