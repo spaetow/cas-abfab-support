@@ -20,11 +20,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>uk.ac.diamond</groupId>
-  <artifactId>diamond-cas-abfab-support</artifactId>
+  <artifactId>diamond-cas3-abfab-support</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
 
-  <name>Diamond CAS ABFAB Radius Support Extension</name>
+  <name>Diamond CAS 3 ABFAB Radius Support Extension</name>
   <url>http://www.diamond.ac.uk/</url>
 
   <properties>

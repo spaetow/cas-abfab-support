@@ -7,6 +7,11 @@
  * 
  *   http://www.apache.org/licenses/LICENSE-2.0
  *  
+ * Portions of this file were licensed to Jasig under one or 
+ * more contributor license agreements. See the NOTICE file 
+ * distributed with this work for additional information 
+ * regarding copyright ownership.
+ * 
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -74,6 +79,14 @@ public class ABFABRadiusAuthenticationHandler extends
      */
     private String principalIdentifierURN;
 
+    /**
+     * Authenticates the given credentials against the list of RADIUS servers,
+     * and extends the service to retrieve the ultimate principal as returned in
+     * a SAML assertion
+     * @param credentials the username and password to authenticate
+     * @return true (accept) or false (deny)
+     * @throws AuthenticationException
+     */
     protected final boolean authenticateUsernamePasswordInternal(final UsernamePasswordCredentials credentials) throws AuthenticationException {
 
         for (final RadiusServer radiusServer : this.servers) {

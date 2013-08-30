@@ -7,6 +7,11 @@
  * 
  *   http://www.apache.org/licenses/LICENSE-2.0
  *  
+ * Portions of this file were licensed to Jasig under one or 
+ * more contributor license agreements. See the NOTICE file 
+ * distributed with this work for additional information 
+ * regarding copyright ownership.
+ * 
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -94,7 +99,14 @@ public final class ABFABRadiusServerImpl implements RadiusServer {
     		final UsernamePasswordCredentials usernamePasswordCredentials) {
     	return (this.authenticateEx(usernamePasswordCredentials) instanceof AccessAccept);
     }
-    
+
+    /**
+     *  
+     * @param credentials The username and password used to authenticate against the server
+     * @return The RADIUS packet containing either an accept or deny and the SAML assertion
+     * @throws IllegalArgumentException
+     * @throws IllegalStateException
+     */
     public RadiusPacket authenticateEx(final UsernamePasswordCredentials credentials) 
     		throws IllegalArgumentException, IllegalStateException {
 
