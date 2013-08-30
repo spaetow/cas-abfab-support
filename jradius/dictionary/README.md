@@ -22,3 +22,10 @@ To use this dictionary, simply include the following dependency in the POM file 
 In your source code, continue to import it as follows:
 
 import net.jradius.dictionary.[attribute class name];
+
+Known Issues:
+=============
+
+The dictionary.alcatel.sr dictionary contains enumerations called 'null'. This conflicts with the 
+reserved word 'null' in Java. Rename each enumeration to 'nul' before building. It does not impact
+the use of the classes or a RADIUS conversation. This has been raised with Coova.
