@@ -27,7 +27,8 @@ CAS 3.5.2:
     
     xmlns:c="http://www.springframework.org/schema/c"
     
-    2. Specify your RadiusServer and radiusClientFactory beans (in CAS 3.x, no more constructor-arg hell):
+    2. Specify your RadiusServer and radiusClientFactory beans (in CAS 3.x, no more constructor-arg 
+       hell):
     
     <!-- RADIUS server protocol choice -->
     <bean id="RadiusServer_id1"
