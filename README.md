@@ -25,7 +25,7 @@ Prerequisites
 
 The ABFAB components require the use of the Coova JRadius library, which in turn requires the IPDR base. To enable the use of these components, you must:
 
-Define the Coova repository in the POM.XML file for the app using the ABFAB components
+Define the Coova repository in the POM.XML file for the app using the ABFAB components:
 
       <repositories>
         <repository>
