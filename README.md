@@ -48,7 +48,7 @@ Usage
 Usage of ABFABRadiusServerImpl in the deployerConfigContext.xml matches the CAS 4.0.0 style, and is compatible with 
 CAS 3.5.2:
     
-    1. Include the following namespace:
+    1. Include the following namespace (if it is not included already):
     
     xmlns:c="http://www.springframework.org/schema/c"
     
