@@ -23,11 +23,10 @@ It contains:
 Prerequisites
 -------------
 
-The ABFAB components require the use of the Coova JRadius library, which in turn requires the IPDR base. To enable the use of these components, you must:
+The ABFAB components require the use of the Coova JRadius library, which in turn requires the IPDR base. To enable the use of these components, you must
 
-1. Define the Coova repository in the POM.XML file for the app using the ABFAB components:
+Define the Coova repository in the POM.XML file for the app using the ABFAB components
 
-<code>
       <repositories>
         <repository>
           <id>coova</id>
@@ -35,12 +34,11 @@ The ABFAB components require the use of the Coova JRadius library, which in turn
           <url>http://coova-dev.s3.amazonaws.com/mvn</url>
         </repository>
       </repositories>
-</code>
-      
-2. You must install IPDR base manually using the below steps:
-   - Download http://sourceforge.net/projects/ipdr/files/java_ipdrbase/2.0.0/org.ipdrjava_2.0.0.zip/download
-   - Extract org.ipdr_2.0.0/ipdr.jar
-   - Install it with Maven: mvn install:install-file -DgroupId=ipdr -DartifactId=ipdrbase -Dversion=2.0.0 -Dpackaging=jar -Dfile=/path/to/extracted/ipdr.jar
+
+You must install IPDR base manually using the below steps:
+   - Download [org.ipdrjava_2.0.0.zip](http://sourceforge.net/projects/ipdr/files/java_ipdrbase/2.0.0/org.ipdrjava_2.0.0.zip/download)
+   - Extract **org.ipdr_2.0.0/ipdr.jar**
+   - Install it with Maven: *mvn install:install-file -DgroupId=ipdr -DartifactId=ipdrbase -Dversion=2.0.0 -Dpackaging=jar -Dfile=/path/to/extracted/ipdr.jar*
 
 All other components should be available from Maven Central.
 
