@@ -77,14 +77,6 @@ public class ABFABRadiusAuthenticationHandler extends AbstractUsernamePasswordAu
      */
     private String principalIdentifierURN;
 
-    /**
-     * Authenticates the given credentials against the list of RADIUS servers,
-     * and extends the service to retrieve the ultimate principal as returned in
-     * a SAML assertion
-     * @param credentials the username and password to authenticate
-     * @return true (accept) or false (deny)
-     * @throws AuthenticationException
-     */
     @Override
     protected final Principal authenticateUsernamePasswordInternal(final String username, final String password)
             throws GeneralSecurityException, PreventedException {

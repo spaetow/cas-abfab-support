@@ -1,4 +1,4 @@
-package uk.ac.diamond.cas.abfab.radius.authentication.handler;
+package uk.ac.diamond.cas.adaptors.radius;
 
 import net.jradius.exception.UnknownAttributeException;
 import net.jradius.packet.attribute.AttributeFactory;

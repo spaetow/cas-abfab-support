@@ -5,6 +5,7 @@ import net.jradius.packet.attribute.AttributeFactory;
 import net.jradius.packet.attribute.AttributeList;
 import net.jradius.packet.attribute.RadiusAttribute;
 import net.jradius.packet.attribute.value.StringValue;
+import uk.ac.diamond.cas.adaptors.radius.RADIUSAttributeFilter;
 
 public class SAMLAssertionAttributeFilter extends RADIUSAttributeFilter {
     
