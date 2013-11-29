@@ -1,4 +1,9 @@
 <!--
+  ~ Licensed to Diamond Light Source under one or more 
+  ~ contributor license agreements. See the NOTICE file 
+  ~ distributed with this work for additional information 
+  ~ regarding copyright ownership.
+  ~ 
   ~ Diamond Light Source Limited licenses this file to you 
   ~ under the Apache License, Version 2.0 (the "License"); 
   ~ you may not use this file except in compliance with the 
@@ -19,87 +24,153 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
   <groupId>uk.ac.diamond</groupId>
   <artifactId>diamond-cas4-abfab-support</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <name>Diamond CAS 4 ABFAB Radius Support Extension</name>
+  <description>An extension to enable ABFAB (Moonshot) support in Jasig CAS</description>
   <url>http://www.diamond.ac.uk/</url>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <scm>
+    <connection>scm:git:git@github.com:spaetow/cas-abfab-support.git</connection>
+    <developerConnection>scm:git:git@github.com:spaetow/cas-abfab-support.git</developerConnection>
+    <url>https://github.com/spaetow/cas-abfab-support</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>spaetow</id>
+      <name>Stefan Paetow</name>
+      <email>stefan.paetow@diamond.ac.uk</email>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-core</artifactId>
-            <version>4.0.0-RC2-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+      <groupId>org.jasig.cas</groupId>
+      <artifactId>cas-server-core</artifactId>
+      <version>4.0.0-RC2-SNAPSHOT</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-support-radius</artifactId>
-            <version>4.0.0-RC2-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+      <groupId>org.jasig.cas</groupId>
+      <artifactId>cas-server-support-radius</artifactId>
+      <version>4.0.0-RC2-SNAPSHOT</version>
+    </dependency>
 
-        <dependency>
-            <groupId>net.jradius</groupId>
-            <artifactId>jradius-core</artifactId>
-            <version>1.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+    <dependency>
+      <groupId>net.jradius</groupId>
+      <artifactId>jradius-core</artifactId>
+      <version>1.0.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-        <dependency>
-            <groupId>uk.ac.diamond</groupId>
-            <artifactId>jradius-abfab-dictionary</artifactId>
-            <version>1.1.4</version>
-        </dependency>
+    <dependency>
+      <groupId>uk.ac.diamond</groupId>
+      <artifactId>jradius-abfab-dictionary</artifactId>
+      <version>1.1.4</version>
+    </dependency>
 
-        <dependency>
-            <groupId>net.jradius</groupId>
-            <artifactId>jradius-extended</artifactId>
-            <version>1.1.4</version>
-        </dependency>
+    <dependency>
+      <groupId>net.jradius</groupId>
+      <artifactId>jradius-extended</artifactId>
+      <version>1.1.4</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.opensaml</groupId>
-            <artifactId>opensaml</artifactId>
-            <version>2.5.1-1</version>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>log4j-over-slf4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>joda-time</groupId>
-                    <artifactId>joda-time</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+    <dependency>
+      <groupId>org.opensaml</groupId>
+      <artifactId>opensaml</artifactId>
+      <version>2.5.1-1</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>log4j-over-slf4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>joda-time</groupId>
+          <artifactId>joda-time</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 
-    <repositories>
-        <repository>
-          <id>coova</id>
-          <name>Coova Repository</name>
-          <url>http://coova-dev.s3.amazonaws.com/mvn</url>
-        </repository>
-  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
