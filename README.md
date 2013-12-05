@@ -86,7 +86,7 @@ CAS 3.5.2:
     <dependency>
       <groupId>uk.ac.diamond</groupId>
       <artifactId>diamond-cas3-abfab-support</artifactId>
-      <version>0.1.0</version>
+      <version>1.0.0</version>
     </dependency>
 
 	CAS 4.0.0:  
@@ -94,7 +94,7 @@ CAS 3.5.2:
     <dependency>
       <groupId>uk.ac.diamond</groupId>
       <artifactId>diamond-cas4-abfab-support</artifactId>
-      <version>0.1.0</version>
+      <version>1.0.0</version>
     </dependency>
 	
 This is still a work in progress.
