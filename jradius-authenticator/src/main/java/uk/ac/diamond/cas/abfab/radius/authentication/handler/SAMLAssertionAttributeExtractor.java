@@ -87,7 +87,7 @@ public class SAMLAssertionAttributeExtractor {
             List<Attribute> attributes = attributeStatement.getAttributes();
             if (!attributes.isEmpty()) {
                 for (Attribute attribute : attributes) {
-                    if (attribute.getName().indexOf(attributeId) == 0) {
+                    if (attribute.getName().equals(attributeId)) {
                         XMLObject attributeValue = attribute.getAttributeValues().get(0);
                         if (attributeValue instanceof XSString) {
                             return ((XSString) attributeValue).getValue();
